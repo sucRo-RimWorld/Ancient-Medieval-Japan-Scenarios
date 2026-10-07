@@ -77,3 +77,6 @@ try {
  Assert ($LASTEXITCODE -ne 0) 'ERROR log accepted.'
  Write-Host '[OK] Four Scenario profile staging/config/summary/negative tooling checks; no game run claimed.'
 } finally { if (Test-Path $temp) { Remove-Item -LiteralPath $temp -Recurse -Force } }
+
+# The expected ERROR-negative leaves LASTEXITCODE=1; report suite success explicitly.
+exit 0
