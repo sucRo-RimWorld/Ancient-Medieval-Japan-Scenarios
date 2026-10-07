@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Start-only player faction; this does not add an NPC faction pack. -->
+  <FactionDef ParentName="PlayerFactionBase">
+    <defName>AMJC_PlayerVillage</defName>
+    <label>New village</label>
+    <description>A small community of ordinary people establishing a new village.</description>
+    <isPlayer>true</isPlayer>
+    <pawnSingular>villager</pawnSingular>
+    <pawnsPlural>villagers</pawnsPlural>
+    <basicMemberKind>AMJC_Villager</basicMemberKind>
+    <techLevel>Medieval</techLevel>
+    <backstoryFilters>
+      <li><categories><li>Tribal</li></categories></li>
+    </backstoryFilters>
+    <factionIconPath>World/WorldObjects/Expanding/Village</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <playerInitialSettlementNameMaker>NamerInitialSettlementColony</playerInitialSettlementNameMaker>
+    <factionNameMaker>NamerFactionTribal</factionNameMaker>
+    <settlementNameMaker>NamerSettlementTribal</settlementNameMaker>
+    <allowedCultures><li>Corunan</li></allowedCultures>
+    <forageabilityFactor>1</forageabilityFactor>
+    <!-- Three explicit Scenario parts own starting research; no inherited tag grants. -->
+    <startingResearchTags />
+    <startingTechprintsResearchTags />
+    <apparelStuffFilter><thingDefs><li>Cloth</li></thingDefs></apparelStuffFilter>
+  </FactionDef>
+</Defs>
+

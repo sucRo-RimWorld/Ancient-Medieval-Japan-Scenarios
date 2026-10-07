@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <AMJC_PlayerVillage.label>新しい村</AMJC_PlayerVillage.label>
+  <AMJC_PlayerVillage.description>新しい土地に村を興す、一般の人々の小さな共同体。</AMJC_PlayerVillage.description>
+  <AMJC_PlayerVillage.pawnSingular>村人</AMJC_PlayerVillage.pawnSingular>
+  <AMJC_PlayerVillage.pawnsPlural>村人たち</AMJC_PlayerVillage.pawnsPlural>
+</LanguageData>
+

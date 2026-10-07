@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ScenarioDef[defName="AMJC_NewVillage"]/scenario/parts/li[thingDef="RawRice"]</xpath>
+    <value>
+      <li Class="ScenPart_StartingThing_Defined">
+        <def>StartingThing_Defined</def>
+        <thingDef>AMJC_Millet</thingDef>
+        <count>200</count>
+      </li>
+      <li Class="ScenPart_StartingThing_Defined">
+        <def>StartingThing_Defined</def>
+        <thingDef>AMJC_RawMillet</thingDef>
+        <count>100</count>
+      </li>
+    </value>
+  </Operation>
+</Patch>

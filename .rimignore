@@ -1,0 +1,86 @@
+# AMJ Workshop distribution exclusions (YADA basename rules, inherited recursively).
+# Keep only runtime assets, Mod metadata, and required license/attribution notices.
+# Shared policy: Core Docs/WorkshopPackaging.md
+
+# Version control, editor and publisher metadata
+.git
+.github
+.gitattributes
+.gitignore
+.gitkeep
+.rimignore
+.workshopignore
+_PublisherPlus.xml
+.idea
+.vs
+.vscode
+.codex
+.editorconfig
+.DS_Store
+Thumbs.db
+
+# Development material, documentation, source and automation
+AGENTS.md
+README.md
+Art
+Docs
+Source
+Sources
+Scripts
+Tests
+TestResults
+DevQuickstarts
+DevRimTests
+_E2E
+_AMJ_PublishStaging
+__pycache__
+.pytest_cache
+bin
+obj
+*.bat
+*.cmd
+*.ps1
+*.py
+*.pyc
+*.cs
+*.csproj
+*.sln
+
+# Local test overrides and test assemblies (basename, not Patches/path)
+_LocalTest.xml
+*.Quicktests.dll
+*.Tests.dll
+*.E2E.dll
+
+# Authoring files, archives, backups and debug/build leftovers
+*.xcf
+*.psd
+*.kra
+*.blend
+*.b64
+*.zip
+*.7z
+*.pdb
+*.mdb
+*.bak
+*.cache
+*.lnk
+*.swp
+*.tmp
+*.user
+*.nupkg
+*.BuildWithSkipAnalyzers
+*.CopyComplete
+*.DotSettings
+*.DotSettings.user
+*.FileListAbsolute.txt
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+_._
+_IsIncrementalBuild
+build.force
+project.assets.json
+project.packagespec.json
+rider.project.restore.info
+rwconfigrc.json

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <PawnKindDef ParentName="BasePlayerPawnKind">
+    <defName>AMJC_Villager</defName>
+    <label>villager</label>
+    <race>Human</race>
+    <defaultFactionDef>AMJC_PlayerVillage</defaultFactionDef>
+    <backstoryCategories><li>Tribal</li></backstoryCategories>
+    <chemicalAddictionChance>0.05</chemicalAddictionChance>
+    <apparelTags>
+      <li>Neolithic</li>
+    </apparelTags>
+    <apparelMoney>200~600</apparelMoney>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <techHediffsChance>0</techHediffsChance>
+    <initialResistanceRange>9~15</initialResistanceRange>
+  </PawnKindDef>
+</Defs>
+

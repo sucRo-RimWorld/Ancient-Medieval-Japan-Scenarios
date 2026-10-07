@@ -1,0 +1,28 @@
+{
+  "status": "Independent repository development candidate; runtime and save migration not verified",
+  "grainsPackageId": "sucro.ancientmedievaljapan.core",
+  "scenarioPackageId": "sucro.ancientmedievaljapan.scenarios",
+  "standaloneGrainCandidate": {
+    "defName": "RawRice",
+    "count": 300,
+    "status": "draft only"
+  },
+  "sourceHashes": {
+    "Defs/Scenarios/Scenarios_NewVillage.xml": "cc1e66c1738450ffdca90298d5b454c007d8d0d81288b89b5f2add0370324c6f",
+    "Defs/FactionDefs/Factions_PlayerVillage.xml": "8a2cf4b50b8e01543f2dba178b93e71892743f72b48d8816d124094def391bec",
+    "Defs/PawnKindDefs/PawnKinds_Villager.xml": "9babb5edca55aed4122ed4a3c9dfe6e595877af076292639f176f7f83fa7fe97",
+    "Languages/English/Keyed/AMJC_Scenarios.xml": "5f31f066d34a7d24fb6e87a061871a88e19987b252dd8dbcfcbeb64d00330e7c",
+    "Languages/Japanese/Keyed/AMJC_Scenarios.xml": "519e76094174ca55889ab59f9ab587f7b9c88b3a59ca4aeb48783fd1136a859d",
+    "Languages/Japanese/DefInjected/ScenarioDef/AMJC_NewVillage.xml": "1c81284f07ce689a4e2c9761594fb01a3a45ce54f9964812652843aedc1efdff",
+    "Languages/Japanese/DefInjected/FactionDef/AMJC_PlayerVillage.xml": "91b8b757731e7fbf9f5f47527a72777877b710754980eb4cd2269797ef3e4b0b",
+    "Languages/Japanese/DefInjected/PawnKindDef/AMJC_Villager.xml": "c3dafdf1be2f9f40f283d499f5f842838c48be08913b3cce49f038d149cdf3ea",
+    "Compatibility/MedievalOverhaul/Patches/MedievalOverhaul_StageA_Base.xml": "1d8367766a66f993a2ae1c73bad76848f50ffc5ee78101f124a1cd3afeed1140",
+    "loadFolders.xml": "e166fb148aaa811213d1d9326390c69cc3d0e5831d91b3dc7ba30126f5dbac39",
+    "About/About.xml": "33c587ec510c793a779d69b6c511bae419a51c9285eb77f48232afef29e8852c",
+    "Tests/Fixtures/ScenarioExtraction/manifest.json": "fc6975e5c238e64315acc0aa04b4fec05622ef2ec953d42cbd6b258fa5c55092",
+    "Scripts/prepare_scenario_extraction.py": "d9bb96626b4fb2244c8c561d38007bf80ff5b2b98272fe6cbdd602b4c043c2e1"
+  },
+  "sourceRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Core",
+  "sourceCommit": "c792e0be725ba32b26a760578c25a0e36e0a1bad",
+  "targetRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios"
+}

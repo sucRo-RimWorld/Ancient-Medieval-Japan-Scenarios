@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ScenarioDef[defName="AMJC_NewVillage"]/scenario/parts</xpath>
+    <value>
+      <parts>
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+          <def>ConfigPage_ConfigureStartingPawns</def>
+          <pawnCount>5</pawnCount>
+          <pawnChoiceCount>8</pawnChoiceCount>
+        </li>
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>DankPyon_Lumber</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>DankPyon_RusticFurniture</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>DankPyon_BasicCooking</project>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>DankPyon_MealRations</thingDef>
+          <count>60</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>RawRice</thingDef>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineHerbal</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>WoodLog</thingDef>
+          <count>200</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>DankPyon_RawWood</thingDef>
+          <count>200</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>DankPyon_IronIngot</thingDef>
+          <count>30</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Cloth</thingDef>
+          <count>80</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Silver</thingDef>
+          <count>150</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Bow_Short</thingDef>
+          <count>2</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MeleeWeapon_Knife</thingDef>
+          <count>2</count>
+          <stuff>DankPyon_IronIngot</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MeleeWeapon_Club</thingDef>
+          <count>1</count>
+          <stuff>WoodLog</stuff>
+        </li>
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <textKey>AMJC_GameStart_NewVillage</textKey>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+      </parts>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PawnKindDef[defName="AMJC_Villager"]/apparelTags</xpath>
+    <value>
+      <li>DankPyon_Peasant</li>
+    </value>
+  </Operation>
+</Patch>
