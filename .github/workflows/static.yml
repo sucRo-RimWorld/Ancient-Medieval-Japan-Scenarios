@@ -9,6 +9,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: python Tests/test_scenarios.py
+      - name: Save input and conservation gate tooling (synthetic XML only)
+        run: python Tests/test_scenario_save_contract.py
   windows-tooling:
     runs-on: windows-latest
     steps:
