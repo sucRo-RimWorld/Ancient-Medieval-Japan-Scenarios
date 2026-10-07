@@ -10,5 +10,5 @@
     <li>DankPyon.Medieval.Overhaul</li>
     <li>sucro.ancientmedievaljapan.core</li>
   </loadAfter>
-  <description>Development candidate for independent starting scenarios. Vanilla base; optional AMJ Grains and Medieval Overhaul integration. Not release-ready. Current unmodified AMJ Core cannot coexist because it still provides the same DefNames. Update Core to the guarded migration version before adding this mod. Existing-save addition, removal and provider replacement remain unverified. RawRice 300 is a draft starting-stock choice.</description>
+  <description>Development candidate for independent starting scenarios. Vanilla base; optional AMJ Grains and Medieval Overhaul integration. With Grains, use the guarded migration version (3b92e3816d78f8ee9596c87a76e937f276d3344c or later); older Core/Grains still provides duplicate DefNames. Explicit XML provider checks pass, but actual game starts and existing-save addition, removal and provider replacement remain unverified. Not release-ready. RawRice 300 is a draft starting-stock choice.</description>
 </ModMetaData>
