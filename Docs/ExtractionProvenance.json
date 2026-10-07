@@ -24,5 +24,6 @@
   },
   "sourceRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Core",
   "sourceCommit": "c792e0be725ba32b26a760578c25a0e36e0a1bad",
-  "targetRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios"
+  "targetRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios",
+  "currentSourceRepository": "sucRo-RimWorld/Ancient-Medieval-Japan-Grains"
 }

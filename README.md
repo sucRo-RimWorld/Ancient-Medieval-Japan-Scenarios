@@ -3,7 +3,7 @@
 独立した開始シナリオModの開発候補です。packageIdは `sucro.ancientmedievaljapan.scenarios`。
 Grainsとは別リポジトリで所有・配布します。専用リポジトリ: https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios 。
 
-Vanillaを基盤とし、AMJ Grains（現行CoreのpackageId）とMedieval Overhaulは任意互換です。
+Vanillaを基盤とし、[AMJ Grains](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains)（旧CoreのpackageIdを維持）とMedieval Overhaulは任意互換です。
 AMJC_NewVillage、AMJC_PlayerVillage、AMJC_Villagerと開始ダイアログを維持します。
 MO互換の後にGrains互換を適用します。単独開始のRawRice 300は数量未承認の試案です。
 
@@ -23,3 +23,5 @@ NewVillageStepsとQuickstartの実行時テスト移管、旧セーブ・追加�
 
 抽出元と入力SHA-256は `Docs/ExtractionProvenance.json` に記録しています。
 `.rimignore` は購読者に不要なソース・テスト・文書を配布対象から除きます。
+
+Grainsのリポジトリ改名はpackageId変更ではありません。任意互換の条件は引き続き `sucro.ancientmedievaljapan.core` です。

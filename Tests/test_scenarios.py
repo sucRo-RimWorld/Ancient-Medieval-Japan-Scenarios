@@ -2,6 +2,10 @@
 from copy import deepcopy
 from pathlib import Path
 import unittest
+import fnmatch
+import io
+import subprocess
+import zipfile
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 MO='dankpyon.medieval.overhaul';GRAINS='sucro.ancientmedievaljapan.core'
@@ -61,5 +65,17 @@ class Contracts(unittest.TestCase):
         for lang in ('English','Japanese'):
             dialog=ET.parse(ROOT/f'Languages/{lang}/Keyed/AMJC_Scenarios.xml').getroot()
             self.assertIsNotNone(dialog.find('AMJC_GameStart_NewVillage'))
+
+class Packaging(unittest.TestCase):
+    def test_subscriber_archive_matches_rimignore(self):
+        rules=[x.strip() for x in (ROOT/'.rimignore').read_text().splitlines() if x.strip() and not x.startswith('#')]
+        tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
+        expected={p for p in tracked if not any(fnmatch.fnmatch(part,rule) for part in Path(p).parts for rule in rules)}
+        data=subprocess.check_output(['git','archive','--format=zip','HEAD'],cwd=ROOT)
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            actual={p for p in archive.namelist() if not p.endswith('/')}
+            self.assertEqual(actual,expected)
+            self.assertEqual(len(actual),13)
+            for path in actual:self.assertEqual(archive.read(path),(ROOT/path).read_bytes())
 
 if __name__=='__main__':unittest.main()
