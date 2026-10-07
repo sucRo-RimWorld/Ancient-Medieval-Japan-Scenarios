@@ -34,3 +34,14 @@ When a new AMJ idea may become a separate Mod but does not yet have an owning re
 
 When work in this repository discovers an AMJ idea that may become a separate Mod but does not yet have an owning repository, **do not develop its evolving design here**. Record the concept, research and roadmap state in `sucRo-RimWorld/Ancient-Medieval-Japan-Project` until the author creates/selects an owner repository. Keep only a concise compatibility or ownership-boundary pointer here when it materially affects this repository.
 
+## World Tech Level recommendation (AMJ common)
+
+**Confirmed:** 2026-10-08 JST.
+
+> AMJとして古代～中世に限定した世界を構成する場合は World Tech Level の Medieval 設定を推奨。
+
+This is a conditional recommendation for assembling an era-limited AMJ world, not a mandatory dependency or a prerequisite for using this individual Mod. Distinguish it from feature-specific compatibility/recommendations when preparing public descriptions. Do not claim that Medieval tech filtering guarantees Japanese historical/cultural suitability or removes every inappropriate event.
+
+Canonical policy: [Project architecture — era-limited world recommendation](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Architecture.md#era-limited-world-recommendation).
+
+The proposed **Ancient & Medieval Japan - World Rules** remains an uncommitted idea in Project `Docs/Ideas.md`; its ownership, filter scope and relationship/dependency to World Tech Level must be decided separately. Do not add global Incident/Quest/Trader/MapGen filtering to this Mod merely because the recommendation exists.
