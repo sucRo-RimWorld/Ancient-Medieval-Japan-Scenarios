@@ -20,7 +20,8 @@ MO互換の後にGrains互換を適用します。単独開始のRawRice 300は�
 
 `python Tests/test_scenarios.py` は4構成の明示XML、任意互換の条件・順序、保存用識別子を検証します。
 静的PASSは継承・実ゲーム起動・開始・セーブ成功を意味しません。
-NewVillageStepsとQuickstartの実行時テスト移管、旧セーブ・追加・削除の自動テストは次の実装です。
+NewVillageStepsとQuickstartをScenariosへ移管し、4構成×3件の実行時テストソースとWindows隔離ランナーを用意しました。
+手順と未検証範囲は [Docs/RuntimeTesting.md](Docs/RuntimeTesting.md)。旧セーブ・追加・削除の自動テストは次の実装です。
 実行時テストは非表示で描画経路を維持し、対象Mod由来ERRORを全体失敗として扱います。
 
 抽出元と入力SHA-256は `Docs/ExtractionProvenance.json` に記録しています。

@@ -9,3 +9,23 @@ jobs:
         with:
           python-version: '3.11'
       - run: python Tests/test_scenarios.py
+  windows-tooling:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: sucRo-RimWorld/Ancient-Medieval-Japan-Grains
+          ref: faa2cedaa145811e9bb23598b5f11d78bb090984
+          path: Tests/Fixtures/GrainsOwner
+      - name: Parse scripts with Framework-era Windows PowerShell
+        shell: powershell
+        run: |
+          foreach ($script in Get-ChildItem Scripts,Tests -Recurse -File -Filter *.ps1 | Where-Object { $_.FullName -notlike '*GrainsOwner*' }) {
+            $tokens=$null; $errors=$null
+            $null=[System.Management.Automation.Language.Parser]::ParseFile($script.FullName,[ref]$tokens,[ref]$errors)
+            if ($errors.Count) { throw "$($script.FullName): $errors" }
+          }
+      - name: Profile staging, provider isolation, summary and ERROR negatives
+        shell: powershell
+        run: ./Tests/test_scenario_profiles.ps1 -GrainsRepositoryRoot ./Tests/Fixtures/GrainsOwner
