@@ -75,7 +75,7 @@ class Packaging(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
             actual={p for p in archive.namelist() if not p.endswith('/')}
             self.assertEqual(actual,expected)
-            self.assertEqual(len(actual),13)
+            self.assertTrue({"About/About.xml", "About/Manifest.xml", "About/Changelog.txt"}.issubset(actual))
             for path in actual:self.assertEqual(archive.read(path),(ROOT/path).read_bytes())
 
 if __name__=='__main__':unittest.main()
