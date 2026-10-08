@@ -1,57 +1,19 @@
 # AMJ Scenarios
 
-Read this file, main:Docs/Coordination.md, then relevant implementation/design sources.
-This repository owns starting Scenario/Faction/PawnKind, dialogue, optional starting-stock/research patches and their tests. Grains crops, recipes, equipment and general job tests remain in Core/Grains.
-Keep AMJC DefNames and packageId sucro.ancientmedievaljapan.scenarios. No colon in Mod display names.
-Confirmed design belongs in source/design documents; Coordination is main-only status and handoff.
-Prefer reproducible automated tests. Static tests do not prove runtime or save compatibility. RimWorld automation must retain rendering offscreen/private, and fail on every mod-origin ERROR.
-Historical prose is Japanese-first, author-approved before English translation. Preserve existing translations unless explicitly revising them.
-Follow shared ModDescriptionGuidelines, DevelopmentGoldenPathGuidelines and WorkshopPackaging in https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/tree/main/Docs . Exclude development files through .rimignore and synchronize alternative packaging adapters.
-Do not announce GitHub changes without an actual remote commit SHA. Never claim safe Core/MO removal before real-save migration passes.
+## Start here
 
-## GitHub preflight / CI error hygiene (AMJ common)
+1. Read this file and `main:Docs/Coordination.md`; locate the latest relevant owner/status/evidence, including later corrections. Historical entries are not current approval.
+2. Read Project [AGENTS.md](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/AGENTS.md) and [Docs/SharedRules.md](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/SharedRules.md): apply its stop conditions, then open only the task-relevant canonical procedures.
+3. Read the local specification and affected source/tests below. Shared rules are owned by Project; this file owns only local scope and routing. Missing access or conflicting authority blocks the dependent action, not unrelated safe work.
 
-Follow the project-wide canonical rule in `sucRo-RimWorld/Ancient-Medieval-Japan-Project/AGENTS.md`.
+New features cannot enter implementation before the Project [existing-Mod audit gate](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Research/ExistingModAudit.md#implementation-entry-gate) covers VE and non-VE alternatives and records why independent implementation is needed. Existing approved behavior is not redesigned by this rule audit.
 
-- Before a remote write that can trigger GitHub Actions, inspect the relevant workflow triggers, path filters, required checks, and repository-specific validation path.
-- Run deterministic syntax/structure/XML/packaging/script checks before pushing whenever the current environment can do so. Treat GitHub Actions as a regression gate, not the first parser/debug pass.
-- Do not use repeated commits, PR pushes, API writes, or Actions runs as an exploratory debugger, and do not publish obviously broken intermediate states merely to learn from CI.
-- If CI fails, stop stacking further remote changes on that workstream. Inspect the failing workflow/job/log, identify the concrete cause, validate the correction, then submit one focused fix instead of speculative variants.
-- Where appropriate, use narrow branch/path triggers and `concurrency` / `cancel-in-progress` to avoid duplicate or superseded runs. Do not disable meaningful checks merely to suppress notifications.
-- Documentation-only or coordination-only changes should not trigger heavy runtime/build workflows unless those files are part of the validated contract.
-- Before weakening or excluding a workflow trigger, verify that release, runtime, packaging, and regression coverage remain protected.
+## Scope and local stops
 
-## VE-first overlap audit
+This repository owns starting Scenario/Faction/PawnKind, dialogue, optional starting-stock/research patches and their tests. Grains owns crops, recipes, equipment and general job tests.
 
-Before designing a new substantial AMJ feature or proposing a separate Mod, audit the Vanilla Expanded (VE) family first for functional overlap and prior art, using `sucRo-RimWorld/Ancient-Medieval-Japan-Project/Docs/Research/ExistingModAudit.md` as the canonical criteria. VE is a comparison priority, not the AMJ design baseline or an automatic dependency: evaluate historical/cultural fit, dependency footprint, unrelated attached content, retention ratio and reuse value before choosing use-as-is, optional compatibility, patch/retexture, prior-art-only, or AMJ implementation.
+Keep AMJC DefNames and packageId `sucro.ancientmedievaljapan.scenarios`. Preserve existing translations unless explicitly revising them. Never claim safe Core/Grains/MO removal before the real-save migration gate passes.
 
-## Unowned idea staging
+Read `Docs/RuntimeTesting.md` for real starts and `Docs/SaveMigrationTesting.md` for existing-save evidence. Synthetic save XML and alias-based new-start tests do not prove actual legacy engine load/re-save. Preserve original saves and the user's normal ModsConfig/Prefs.
 
-When a new AMJ idea may become a separate Mod but does not yet have an owning repository, **record its durable concept, research and roadmap state in `sucRo-RimWorld/Ancient-Medieval-Japan-Project`**. Do not let this runtime repository become the evolving design home merely because the idea was discovered here. Keep only a concise compatibility or ownership-boundary pointer when relevant. Once a dedicated owner repository exists, migrate confirmed design there.
-
-
-## Unowned AMJ idea staging
-
-When work in this repository discovers an AMJ idea that may become a separate Mod but does not yet have an owning repository, **do not develop its evolving design here**. Record the concept, research and roadmap state in `sucRo-RimWorld/Ancient-Medieval-Japan-Project` until the author creates/selects an owner repository. Keep only a concise compatibility or ownership-boundary pointer here when it materially affects this repository.
-
-## World Tech Level recommendation (AMJ common)
-
-**Confirmed:** 2026-10-08 JST.
-
-> AMJとして古代～中世に限定した世界を構成する場合は World Tech Level の Medieval 設定を推奨。
-
-This is a conditional recommendation for assembling an era-limited AMJ world, not a mandatory dependency or a prerequisite for using this individual Mod. Distinguish it from feature-specific compatibility/recommendations when preparing public descriptions. Do not claim that Medieval tech filtering guarantees Japanese historical/cultural suitability or removes every inappropriate event.
-
-Canonical policy: [Project architecture — era-limited world recommendation](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Architecture.md#era-limited-world-recommendation).
-
-The proposed **Ancient & Medieval Japan - World Rules** remains an uncommitted idea in Project `Docs/Ideas.md`; its ownership, filter scope and relationship/dependency to World Tech Level must be decided separately. Do not add global Incident/Quest/Trader/MapGen filtering to this Mod merely because the recommendation exists.
-
-## Shared rules owner — AMJ Project
-
-Project owns all AMJ-common policy. Before applying a shared rule, read the current [SharedRules index](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/SharedRules.md) and the relevant canonical document there. This repository owns only its Mod-specific specification/procedure; do not develop shared rules in Grains or another runtime Mod.
-
-For AMJ Workshop previews (including text-only image ideas), read Project `Docs/WorkshopCoverStyle.md`, `Docs/GoldenPaths/WorkshopCoverPipeline.md` and `Docs/References/AMJ_WorkshopCover_Manifest.md`, and inspect the actual registered Project reference/base/mask. Present a text composition proposal before generating a new cover. An image-idea request alone does not authorize generation. Never regenerate the common pixels or restore an obsolete cover layout.
-
-## Add Changenote release metadata
-
-Follow Project `Docs/WorkshopChangenotes.md` from repository initialization. Keep `About/About.xml` `modVersion`, `About/Manifest.xml` `version` and `About/Changelog.txt` current heading identical. Ship both metadata files with the Workshop payload and run `python Tests/validate_add_changenote.py` before publication. Add Changenote belongs to the author's upload toolset, not subscribers.
+Static contracts: `Tests/test_scenarios.py`, `Tests/test_scenario_save_contract.py`, `Tests/validate_add_changenote.py`. Follow the existing runtime/profile tooling when those behaviors change.
