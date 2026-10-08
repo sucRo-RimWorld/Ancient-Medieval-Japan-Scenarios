@@ -32,3 +32,10 @@ Next owner unit: implement the isolated production-ID game save-load adapter sep
 **Status:** DONE — current AGENTS and shared-rule references route to Project
 
 Canonical shared rules and Workshop template/tooling now live in Project `Docs/SharedRules.md` and its linked sources. Grains old Markdown paths are migration pointers only. Existing historical coordination entries retain their original commit/path provenance; resolve future work through the new Project index. Mod-specific implementation, tests and accepted content art remain with this repository. No runtime behavior, new preview generation or Steam publication is part of this migration.
+
+### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
+
+**Owner:** Scenarios packaging/release
+**Status:** SOURCE IMPLEMENTED; runtime/old-save publication blockers remain, no Steam upload
+
+Add Changenote support follows Project `Docs/WorkshopChangenotes.md`: source version `0.1.0-dev` agrees across `About/About.xml`, `About/Manifest.xml` and `About/Changelog.txt`. A new fast metadata validator runs in existing static CI. `.rimignore` keeps both About metadata files in YADA-delivered payload. This does not promote the unverified Scenarios gameplay/old-save gates to PASS or create a subscriber dependency.

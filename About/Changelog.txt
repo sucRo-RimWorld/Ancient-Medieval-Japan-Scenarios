@@ -1,0 +1,7 @@
+# Ancient & Medieval Japan - Scenarios
+# Only the current version's block is submitted by Add Changenote during supported uploads.
+
+0.1.0-dev - Scenario development metadata / シナリオ開発版の更新履歴整備
+- Prepared versioned Workshop changenotes for the independent scenario module.
+- 独立したシナリオModにバージョン別Workshop更新履歴を用意しました。
+- Actual scenario-start, old-save, and release acceptance gates remain pending. / シナリオ開始・既存セーブ・公開判定の検証は引き続き未完了です。

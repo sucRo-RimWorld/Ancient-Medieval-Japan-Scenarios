@@ -51,3 +51,7 @@ The proposed **Ancient & Medieval Japan - World Rules** remains an uncommitted i
 Project owns all AMJ-common policy. Before applying a shared rule, read the current [SharedRules index](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/SharedRules.md) and the relevant canonical document there. This repository owns only its Mod-specific specification/procedure; do not develop shared rules in Grains or another runtime Mod.
 
 For AMJ Workshop previews (including text-only image ideas), read Project `Docs/WorkshopCoverStyle.md`, `Docs/GoldenPaths/WorkshopCoverPipeline.md` and `Docs/References/AMJ_WorkshopCover_Manifest.md`, and inspect the actual registered Project reference/base/mask. Present a text composition proposal before generating a new cover. An image-idea request alone does not authorize generation. Never regenerate the common pixels or restore an obsolete cover layout.
+
+## Add Changenote release metadata
+
+Follow Project `Docs/WorkshopChangenotes.md` from repository initialization. Keep `About/About.xml` `modVersion`, `About/Manifest.xml` `version` and `About/Changelog.txt` current heading identical. Ship both metadata files with the Workshop payload and run `python Tests/validate_add_changenote.py` before publication. Add Changenote belongs to the author's upload toolset, not subscribers.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Manifest>
+  <identifier>AncientMedievalJapanScenarios</identifier>
+  <version>0.1.0-dev</version>
+  <dependencies />
+  <incompatibleWith />
+  <loadBefore />
+  <loadAfter />
+  <manifestUri>https://raw.githubusercontent.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios/main/About/Manifest.xml</manifestUri>
+  <downloadUri>https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios</downloadUri>
+</Manifest>
