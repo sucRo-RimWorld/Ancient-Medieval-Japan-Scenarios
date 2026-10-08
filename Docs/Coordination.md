@@ -1,37 +1,15 @@
 # Coordination
 
-2026-10-07: Author selected AMJ - Scenarios and packageId sucro.ancientmedievaljapan.scenarios, then requested a separate repository.
-Independent source candidate prepared from the recorded Core commit. The author created sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios; initial source registration follows on main.
-Core production Defs/loadFolders have not been moved. Existing Core + this candidate is invalid until guarded Legacy extraction is merged.
-Open: guarded Core migration, runtime test ownership transfer, actual four-profile starts and old-save/add/remove tests. No game run or save-migration PASS.
+This file is the live status/handoff surface for AMJ - Scenarios. Confirmed behavior and test procedures belong in the formal owner sources; completed chronology remains recoverable from Git history.
 
-2026-10-07 registration completed: source commit 13372c3794217446ae449140c8e4dd6db77d09ae. Author renamed the source repository to Ancient-Medieval-Japan-Grains (same repository ID). Historical provenance/source hashes remain unchanged; current source repository is recorded separately. Local four-profile XML/negative tests passed; archive parity contains 13 runtime/license files. CI/runtime/save success is not claimed. Grains handoff committed at ac6233b47b387bf68c7b9614daafa241ffa7358a; guarded physical extraction remains next.
+### SCN-CURRENT-20261009 — paused engine/save verification handoff
 
-2026-10-07 guarded Grains production extraction merged: Grains PR #6, merge 3b92e3816d78f8ee9596c87a76e937f276d3344c, implementation c5567a5d8c08be59d96cb5db07bc518ca8c9f332. Grains 3Def/5localization legacy copies and 2 MO starting operations now use provider-absence guards. Actual separate repository pair passed six explicit XML configurations. Grains PR CI Stage A 37614452046 and Workshop 37614451954 succeeded; these do not compile C# or run RimWorld. Scenarios metadata/README now require the guarded Grains version when combined. Runtime/start/save tests and scenario runtime-test ownership transfer remain next; standalone RawRice 300 remains draft.
+**Owner:** Scenarios runtime/save verification  
+**Status:** OPEN — paused while higher-priority Grains work proceeds; engine/runtime/save release gates remain unresolved
 
-2026-10-07 runtime-test ownership transfer merged: Scenarios PR #1 at 3ee114a56e778ace979903e208890ab662179027 (implementation 81f3a3272d5dea0cd54d0134c4aa3e21a50ee15b; Windows negative-test exit fix 46dfc4f09ee3285cc04d87ea097aa9e35bf15805). Grains PR #7 at 69ed44e5fdb3e349bf6dfb429d80f25d7374bb0f (implementation 4a13086fe98f1d65fa66bf61366ff59ba0a82c93).
-- Canonical NewVillageSteps/NewVillageQuickstart and four profiles now live here: vanilla, grains, mo, grains-mo, three runtime cases per profile. Scripts own staged provider aliases, dependency isolation, build, fresh summaries/source fingerprints, private desktop rendering and every-ERROR failure. Docs/RuntimeTesting.md is the formal execution source. Grains normal profiles contain six grain-only cases; its eight-case fixture retains explicit LegacyVillageSteps/AmjLegacyVillageQuickstart compatibility coverage. This fixture does not test existing-save migration.
-- CI PASS: Scenarios static contracts/Windows PowerShell 5.1 tooling 37640057729; Grains Stage A 37640099282 and Workshop 37640099260. Local four-profile tooling, six paired XML configurations, extraction eight methods, unchanged 38-contract snapshot, 26 PNGs and subscriber archive parity passed. Scenarios archive remains 13 files; Grains 75. Summary/ERROR negatives use synthetic tooling data, not game results. Windows tooling failure was an expected negative exit code leaking into the suite result; fixed with explicit suite success after all assertions.
-- Not completed: C# compilation against installed RimWorld/Pickle/Quickstarts, actual four-profile starts, game inheritance/full references/rendering, or old-save/add/remove/re-save verification. No installed game/managed assemblies or game process here. RawRice 300 remains draft; no safe Core/MO removal or release readiness claim. Production metadata/DefNames/dependencies remain unchanged by this test transfer.
-Next owner unit: compile and run the four profiles on an installed game via Scripts/IntegratedRuntimeDesktop/Run-Scenarios-IsolatedDesktop.ps1, retaining rendering and every-ERROR gate. Implement actual legacy-save creation/read/re-save and provider add/remove/overwrite coverage with recorded source and save evidence; this automation is not yet implemented. Keep fallback Defs and Grains About MO dependency behind existing runtime/art/save gates.
+Repository extraction, guarded Grains coexistence, runtime-test ownership transfer, static/CI tooling and read-only save-contract tooling are complete. Current source baseline is the post-PR #2 save-contract implementation line; formal procedures are `Docs/RuntimeTesting.md` and `Docs/SaveMigrationTesting.md`.
 
-2026-10-08 JST legacy-save input/conservation tooling merged: PR #2 at 8d5373655bc3bfb15e287504ccbb790eedc32b90, implementation 5696464f57299ebf8ee00ee621621fff081e6f97, validated tree 1631aa9aef596da1a0eeac96cbb965dabf0173a5. Formal sources: Docs/SaveMigrationTesting.md, Scripts/scenario_save_contract.py, Tests/test_scenario_save_contract.py.
-- Read-only preparation copies production-ID legacy New Village .rws into new output, records SHA-256 and caller-supplied source IDs, and plans guarded legacy, Scenarios addition, reload and removal. Reload/removal require the actual addition re-save. Grains/MO remain installed; source IDs do not attest actual game provenance. Paused XML checks cover Scenario/Faction, villager IDs/kinds/faction refs, nested thing counts, research, ticks and permitted mod changes. Results always retain runtimeVerified=false.
-- Local nine synthetic-XML methods and five static/archive methods PASS; subscriber payload remains 13 files. PR CI 37643645395 PASS (static/new save tests and Windows profile tooling). Earlier push CI 37642387130 was queued; verified PR CI gates this merge. PR creation/merge recovered from prior API errors; contents update still errors, so this main-only status uses tree/commit/ref operations. Earlier attempted unreferenced handoff commits never applied.
-- Still pending: real 1.6 save-shape verification, installed-game C# compilation/four-profile starts, isolated production-ID engine save-load/re-save adapter, actual loader/full refs, exact fresh Pickle/source/DLL/provider/save evidence, rendering and every-ERROR gate. No real save/game assemblies here. No safe Grains/MO removal, provider overwrite, fallback deletion, About MO dependency removal or release readiness claim.
-Next owner unit: implement the isolated production-ID game save-load adapter separately from alias-based new-start E2E, validate the XML adapter with a real fresh legacy fixture, and run the four dependent cases with private rendering, timeouts, precise fresh summaries and every ERROR = 0. Preserve original saves and normal user ModsConfig/Prefs. The current new-start runner does not load old saves.
-
-
-**2026-10-07 author priority update — return to Grains audit:** Static checks and PR CI for the current Scenarios extraction/start tooling/save-contract tooling have passed; no issue is currently detected within that tested scope. The author requested returning to Grains if Scenarios has no detected problem. Additional engine save-load adapter work is therefore paused; no adapter implementation was made. Grains resumes its MO dependency audit (PR #8, `Docs/GrainsDependencyAudit.md`).
-- This is a work-priority change, not runtime/save approval. C# compilation, real starts, old-save/add/remove/re-save, rendering and every-ERROR gates remain pending in `Docs/RuntimeTesting.md` and `Docs/SaveMigrationTesting.md`.
-- Current Scenarios source remains unchanged from save-contract implementation `5696464f57299ebf8ee00ee621621fff081e6f97` (PR #2 CI `37643645395` passed). Resume engine verification from this owner repository when prioritized. No game process or background worker is active.
-
-### DOC-SHARED-RULES-OWNER-001 — Shared rule migration to Project (2026-10-08 JST)
-
-**Owner:** Project common rules / repository routing
-**Status:** DONE — current AGENTS and shared-rule references route to Project
-
-Canonical shared rules and Workshop template/tooling now live in Project `Docs/SharedRules.md` and its linked sources. Grains old Markdown paths are migration pointers only. Existing historical coordination entries retain their original commit/path provenance; resolve future work through the new Project index. Mod-specific implementation, tests and accepted content art remain with this repository. No runtime behavior, new preview generation or Steam publication is part of this migration.
+Still required when this workstream resumes: installed-game C# compilation and four-profile starts, isolated production-ID legacy save load/re-save, provider add/remove coverage, rendering, exact fresh evidence and every-ERROR = 0. No safe Grains/MO removal or release-readiness claim follows from the completed static tooling.
 
 ### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
 
@@ -39,7 +17,6 @@ Canonical shared rules and Workshop template/tooling now live in Project `Docs/S
 **Status:** SOURCE IMPLEMENTED; runtime/old-save publication blockers remain, no Steam upload
 
 Add Changenote support follows Project `Docs/WorkshopChangenotes.md`: source version `0.1.0-dev` agrees across `About/About.xml`, `About/Manifest.xml` and `About/Changelog.txt`. A new fast metadata validator runs in existing static CI. `.rimignore` keeps both About metadata files in YADA-delivered payload. This does not promote the unverified Scenarios gameplay/old-save gates to PASS or create a subscriber dependency.
-
 
 ### RULE-AUDIT-20261008 — operating-rule consolidation
 
