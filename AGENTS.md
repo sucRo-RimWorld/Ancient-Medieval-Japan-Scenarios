@@ -6,7 +6,7 @@ Keep AMJC DefNames and packageId sucro.ancientmedievaljapan.scenarios. No colon 
 Confirmed design belongs in source/design documents; Coordination is main-only status and handoff.
 Prefer reproducible automated tests. Static tests do not prove runtime or save compatibility. RimWorld automation must retain rendering offscreen/private, and fail on every mod-origin ERROR.
 Historical prose is Japanese-first, author-approved before English translation. Preserve existing translations unless explicitly revising them.
-Follow shared ModDescriptionGuidelines, DevelopmentGoldenPathGuidelines and WorkshopPackaging in https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains/tree/main/Docs . Exclude development files through .rimignore and synchronize alternative packaging adapters.
+Follow shared ModDescriptionGuidelines, DevelopmentGoldenPathGuidelines and WorkshopPackaging in https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/tree/main/Docs . Exclude development files through .rimignore and synchronize alternative packaging adapters.
 Do not announce GitHub changes without an actual remote commit SHA. Never claim safe Core/MO removal before real-save migration passes.
 
 ## GitHub preflight / CI error hygiene (AMJ common)
@@ -45,3 +45,9 @@ This is a conditional recommendation for assembling an era-limited AMJ world, no
 Canonical policy: [Project architecture — era-limited world recommendation](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Architecture.md#era-limited-world-recommendation).
 
 The proposed **Ancient & Medieval Japan - World Rules** remains an uncommitted idea in Project `Docs/Ideas.md`; its ownership, filter scope and relationship/dependency to World Tech Level must be decided separately. Do not add global Incident/Quest/Trader/MapGen filtering to this Mod merely because the recommendation exists.
+
+## Shared rules owner — AMJ Project
+
+Project owns all AMJ-common policy. Before applying a shared rule, read the current [SharedRules index](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/SharedRules.md) and the relevant canonical document there. This repository owns only its Mod-specific specification/procedure; do not develop shared rules in Grains or another runtime Mod.
+
+For AMJ Workshop previews (including text-only image ideas), read Project `Docs/WorkshopCoverStyle.md`, `Docs/GoldenPaths/WorkshopCoverPipeline.md` and `Docs/References/AMJ_WorkshopCover_Manifest.md`, and inspect the actual registered Project reference/base/mask. Present a text composition proposal before generating a new cover. An image-idea request alone does not authorize generation. Never regenerate the common pixels or restore an obsolete cover layout.

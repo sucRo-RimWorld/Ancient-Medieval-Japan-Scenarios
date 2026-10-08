@@ -25,3 +25,10 @@ Next owner unit: implement the isolated production-ID game save-load adapter sep
 **2026-10-07 author priority update — return to Grains audit:** Static checks and PR CI for the current Scenarios extraction/start tooling/save-contract tooling have passed; no issue is currently detected within that tested scope. The author requested returning to Grains if Scenarios has no detected problem. Additional engine save-load adapter work is therefore paused; no adapter implementation was made. Grains resumes its MO dependency audit (PR #8, `Docs/GrainsDependencyAudit.md`).
 - This is a work-priority change, not runtime/save approval. C# compilation, real starts, old-save/add/remove/re-save, rendering and every-ERROR gates remain pending in `Docs/RuntimeTesting.md` and `Docs/SaveMigrationTesting.md`.
 - Current Scenarios source remains unchanged from save-contract implementation `5696464f57299ebf8ee00ee621621fff081e6f97` (PR #2 CI `37643645395` passed). Resume engine verification from this owner repository when prioritized. No game process or background worker is active.
+
+### DOC-SHARED-RULES-OWNER-001 — Shared rule migration to Project (2026-10-08 JST)
+
+**Owner:** Project common rules / repository routing
+**Status:** DONE — current AGENTS and shared-rule references route to Project
+
+Canonical shared rules and Workshop template/tooling now live in Project `Docs/SharedRules.md` and its linked sources. Grains old Markdown paths are migration pointers only. Existing historical coordination entries retain their original commit/path provenance; resolve future work through the new Project index. Mod-specific implementation, tests and accepted content art remain with this repository. No runtime behavior, new preview generation or Steam publication is part of this migration.
