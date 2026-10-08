@@ -22,6 +22,8 @@ Adding, removing or switching scenario-content providers in an existing save is 
 
 Details: [url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios]GitHub README[/url]
 
+[hr][/hr]
+
 [h2]日本語 / Japanese[/h2]
 
 [b]中世日本風の小規模集落での開始シナリオを独立させるための、開発中のModです。[/b]
