@@ -1,4 +1,4 @@
-# Ancient & Medieval Japan - Scenarios
+# Ancient & Medieval Japan - Scenarios（中世日本 - シナリオ）
 
 独立した開始シナリオModの開発候補です。packageIdは `sucro.ancientmedievaljapan.scenarios`。
 Grainsとは別リポジトリで所有・配布します。専用リポジトリ: https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios 。
