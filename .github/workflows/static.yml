@@ -8,10 +8,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python Tests/test_scenarios.py
-      - run: python Tests/validate_add_changenote.py
+      - run: python Tests/Production/test_scenarios.py
+      - run: python Tests/Release/test_scenario_package.py
+      - run: python Tests/Release/validate_add_changenote.py
       - name: Save input and conservation gate tooling (synthetic XML only)
-        run: python Tests/test_scenario_save_contract.py
+        run: python Tests/Production/test_scenario_save_contract.py
   windows-tooling:
     runs-on: windows-latest
     steps:

@@ -9,7 +9,7 @@ import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('save_contract', ROOT / 'Scripts/scenario_save_contract.py')
 save = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(save)
