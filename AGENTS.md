@@ -16,4 +16,4 @@ Keep AMJC DefNames and packageId `sucro.ancientmedievaljapan.scenarios`. Preserv
 
 Read `Docs/RuntimeTesting.md` for real starts and `Docs/SaveMigrationTesting.md` for existing-save evidence. Synthetic save XML and alias-based new-start tests do not prove actual legacy engine load/re-save. Preserve original saves and the user's normal ModsConfig/Prefs.
 
-Static contracts: `Tests/test_scenarios.py`, `Tests/test_scenario_save_contract.py`, `Tests/validate_add_changenote.py`. Follow the existing runtime/profile tooling when those behaviors change.
+Static contracts and profile-specific testing instructions are in `Tests/AGENTS.md`; runtime and existing-save evidence remain governed by the referenced formal testing documents.
