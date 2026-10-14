@@ -3,14 +3,15 @@
 ▼ 主な内容
 ・「新しい村」シナリオと専用勢力・村人の分離
 ・既存の内部識別子を維持
-・Vanilla基盤。Grains・Medieval Overhaulと任意互換
+・バニラ単独で開始可能。Grains・Medieval Overhaulは任意
 
 ▼ セーブ互換性
 ・既存セーブへの追加・削除・提供元切替は未検証
 ・既存セーブへ開始物資や研究は追加されない
 
 ▼ 公開状況
-・実ゲーム起動・開始・セーブ移行の検証待ち
+・バニラ・Grains併用の新規開始を実ゲームで検証済み
+・Medieval Overhaul併用の不具合調査と長期プレイ検証は未完了
 ・現在は一般公開・実プレイ向けではない
 
 詳細：https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios

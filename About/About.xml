@@ -11,7 +11,7 @@
     <li>DankPyon.Medieval.Overhaul</li>
     <li>sucro.ancientmedievaljapan.core</li>
   </loadAfter>
-  <description>Development candidate for independent starting scenarios. Vanilla base; optional AMJ Grains and Medieval Overhaul integration. With Grains, use the guarded migration version (3b92e3816d78f8ee9596c87a76e937f276d3344c or later); older Core/Grains still provides duplicate DefNames. Explicit XML provider checks pass, but actual game starts and existing-save addition, removal and provider replacement remain unverified. Not release-ready. RawRice 300 is a draft starting-stock choice.
+  <description>Adds the New Village starting scenario with five villagers and a medieval village faction. Works with Vanilla RimWorld 1.6; AMJ Grains and Medieval Overhaul are optional. Current Grains does not supply starting scenarios. Existing-save changes have not been tested. Development version; Medieval Overhaul combined testing is not complete.
 
-独立した開始シナリオの開発候補。バニラを基本とし、AMJ GrainsおよびMedieval Overhaulとの連携は任意。Grainsと併用する場合は、重複DefNameへの対策を含む移行版（3b92e3816d78f8ee9596c87a76e937f276d3344c以降）を使用すること。それ以前のCore/Grainsには重複DefNameが残る。XML上の提供元確認は通過しているが、ゲーム内での実際の開始、既存セーブへの追加・削除、提供元Modの切り替えは未検証。公開準備は完了していない。開始物資の生米300個は検討中の案。</description>
+「新しい村」の開始シナリオを追加し、5人の村人と中世の村落勢力で開始する。RimWorld 1.6のバニラ単独で使用でき、AMJ GrainsとMedieval Overhaulは任意。現行Grainsには開始シナリオを含まない。既存セーブへの追加・削除は未検証。開発中のため、Medieval Overhaul併用の検証は完了していない。</description>
 </ModMetaData>
