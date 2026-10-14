@@ -4,11 +4,13 @@ This file is the live status/handoff surface for AMJ - Scenarios. Confirmed beha
 
 ### SCN-CURRENT-20261014 — Scenarios sole owner and runtime gate
 
-**Owner:** Scenarios runtime/test verification. **Status:** SOURCE RECONCILIATION IN PROGRESS — four-profile native game evidence remains OPEN.
+**Owner:** Scenarios runtime/test verification. **Status:** NATIVE 1.6 PARTIAL PASS — Scenarios and Scenarios＋Grains E2E 6/6; MO profiles and rendered menu remain OPEN.
 
 2026-10-14 author decision: Since no public/private play or old saves exist, pre-publication Core/Grains scenario save-migration support is unnecessary. Grains no longer supplies the three starting Defs or `LegacyStartingScenarios/`; Scenarios exclusively owns `AMJC_NewVillage`, `AMJC_PlayerVillage`, `AMJC_Villager` and conditional start supplies. The old provider-guard staging and synthetic old-save migrations were removed from Scenarios; current authoritative test procedure is `Docs/RuntimeTesting.md`.
 
-Remaining: actual RimWorld native four-profile new starts, rendering/UI, isolated complete logs and every-ERROR = 0. Neither static CI nor removal of unneeded legacy gates establishes a successful game launch or a release.
+2026-10-14 actual native Linux 1.6 evidence: [Project Actions #38525733684](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38525733684) three-profile loaded-def ownership 3/3, ERROR 0; [#38526753894](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38526753894) Scenarios and Scenarios＋Grains actual colony starts, 6/6, ERROR 0. Pinned Grains 9e1898de and Scenarios bf931a6e. Formal assertions and limits recorded in `Docs/RuntimeTesting.md`.
+
+Remaining: actual native new starts with MO and Grains＋MO, rendered scenario menu and click/screenshot, 1.7, long play. These PASS results are not publication or untested-profile evidence.
 
 ### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
 

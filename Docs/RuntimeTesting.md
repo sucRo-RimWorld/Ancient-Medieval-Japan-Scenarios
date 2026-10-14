@@ -47,7 +47,7 @@ powershell -NoProfile -File Scripts/IntegratedRuntimeDesktop/Run-Scenarios-Isola
 
 通常入口はprivate desktopランチャーとする。描画を無効化せず、表示先をユーザーのデスクトップから隔離する。
 内部Run-ScenarioProfiles.ps1を直接起動すると可視ウィンドウを出し得るため、通常の自動実行には使わない。
-Linux対応はまだ実装していない。Xvfb等の隔離と同じゲートを用意するまでWindows経路を使う。
+Project の専用Linux 1.6ホストで Xvfb / Pickle による独立した新規開始・所有境界E2Eを実装済み。Windows 4構成テストとは独立しており、MOを含む2構成とシナリオ選択画面のピクセル・クリック検証を代替しない。
 
 各構成でfresh summaryが指定した3件すべて成功・失敗0・skip0であることと、隔離ログのERROR 0を両方要求する。
 プロセス失敗・タイムアウト時も両ゲートを確認する。警告は通常非致命、任意Mod由来ERRORも失敗とする。
@@ -57,8 +57,17 @@ Linux対応はまだ実装していない。Xvfb等の隔離と同じゲート�
 
 ローカル／CIのPowerShellテストは仮のインストール台帳・結果・ログを用いた配置／制御のテストであり、
 表示された3/3はゲームの実行結果ではない。C#ソースのコンパイル・ゲーム実行・private desktop上の描画は別ゲート。
-クラウド作業環境にはゲームManaged assembliesがないため、これらは未実施。
+通常のGitHubホストランナーにはゲームManaged assembliesがないが、専用のライセンス済みLinux 1.6ホストで実機テストを実施できる。後述の実行記録以外の構成やUI描画は未検証。
 
 ゲーム実行ハーネスは新規開始専用。旧 Core / Grains シナリオセーブは公開・実プレイ前で存在しないため、旧セーブ移行ゲートと合成XML移行テストは廃止済み。
 
 残作業：実ゲーム環境で Vanilla / Grains / MO / Grains＋MO の4構成をコンパイルして新規開始し、シナリオ定義の一意性、5人の生成、物資・初期研究、派閥参照、全ログ ERROR 0、表示を検証する。
+
+## Linux 1.6実ゲーム検証済み（2026-10-14、対象ソース固定）
+
+Project の独立Linuxランナー（ライセンス済み RimWorld 1.6.4871 rev600、Xvfb + Pickle）で、Grains `9e1898de7104cd951349c6fc0da8ce870626721c` と Scenarios `bf931a6ee0eb9691db16b5edfe3c40c62821f6b5` を厳密に固定して実行した。テスト用Mod IDの別名化以外、Scenario/Faction/PawnKind本番XMLは変えていない。
+
+- [所有境界 Actions #38525733684](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38525733684)：Grains単体（3開始Defなし）、Scenarios単体（3開始Def各1件）、Grains＋Scenarios（各1件）の**3構成×1シナリオ＝3/3 PASS**。全プロファイル正常終了、ERROR 0。ロード済みのDef・partsの存在確認であり、当時の検証は選択画面リストを直接検査していない。
+- [開始 E2E Actions #38526753894](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38526753894)：Scenarios単体およびScenarios＋Grains、各3件（要求プロバイダ、5人/派閥/研究/物資の定義、Quickstartからの実コロニー開始）＝**6/6 PASS**。両構成ともゲーム終了コード0、ERROR 0、Pickle `exitReason=passed`。検証結果とnative UnityログはActions artifactに保存。
+
+**未検証：** Scenarios＋MO、Scenarios＋Grains＋MOの本番新規開始、1.7、シナリオ選択画面を実際に描画したスクリーンショット・クリック操作、長期プレイ、Workshop反映。ここに挙げた実機6件を、未実施構成やUIピクセルに拡大解釈しない。
