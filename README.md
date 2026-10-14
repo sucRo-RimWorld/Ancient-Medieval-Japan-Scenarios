@@ -11,7 +11,7 @@ MO互換の後にGrains互換を適用します。単独開始のRawRice 300は�
 
 Grainsは開始用Scenario/Faction/PawnKind/翻訳を一切同梱しません。Scenariosだけが `AMJC_NewVillage`、`AMJC_PlayerVillage`、`AMJC_Villager` を提供します。Grains非導入のVanilla単独でも開始でき、GrainsとMOは任意互換です。
 
-旧Coreと旧Grainsの未公開シナリオ・セーブに対する移行互換は採用しません。Grains本番の `LegacyStartingScenarios/` は削除済みです。新規開始のゲーム動作は独立した実機テストで検証します。
+旧Coreと旧Grainsの未公開シナリオ・セーブに対する移行互換は採用しません。Grains本番の `LegacyStartingScenarios/` は削除済みです。RimWorld 1.6でScenarios単体・Grains併用の新規開始は実機検証済み。MO併用では音声エラーとGrains同時導入時の物資定義差異が検出されており、全構成の合格には至っていません。
 
 ## 検証
 
