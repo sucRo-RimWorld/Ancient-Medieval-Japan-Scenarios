@@ -88,7 +88,7 @@ namespace AncientMedievalJapanScenarios.E2E
             ctx.Assert(projects.SequenceEqual(StartingResearch.OrderBy(x => x)), "Starting research must match the active profile.");
 
             List<ScenPart_StartingThing_Defined> items = parts.OfType<ScenPart_StartingThing_Defined>().ToList();
-            ctx.Assert(items.Count == Supplies.Count, "Start must contain exactly the designed supply parts.");
+            ctx.Assert(items.Count == Supplies.Count, "Start must contain exactly the designed supply parts: expected=" + Supplies.Count + " [" + string.Join(", ", Supplies.Keys.OrderBy(k => k).ToArray()) + "], actual=" + items.Count + " [" + string.Join(", ", items.Select(p => ((ThingDef)ReadMember(p, "thingDef")).defName + ":" + Convert.ToInt32(ReadMember(p, "count"))).OrderBy(k => k).ToArray()) + "].");
             foreach (KeyValuePair<string, int> supply in Supplies)
             {
                 ScenPart item = items.Single(p => ((ThingDef)ReadMember(p, "thingDef")).defName == supply.Key);
