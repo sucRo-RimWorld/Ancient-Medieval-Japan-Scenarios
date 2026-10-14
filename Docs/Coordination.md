@@ -2,15 +2,15 @@
 
 This file is the live status/handoff surface for AMJ - Scenarios. Confirmed behavior and test procedures belong in the formal owner sources; completed chronology remains recoverable from Git history.
 
-### SCN-CURRENT-20261014 — Scenarios sole owner and runtime gate
+### SCN-CURRENT-20261014 — Exclusive starting-scenario owner, 1.6 native matrix
 
-**Owner:** Scenarios runtime/test verification. **Status:** NATIVE 1.6 PARTIAL PASS — Scenarios and Scenarios＋Grains E2E 6/6; MO profiles and rendered menu remain OPEN.
+**Owner:** Scenarios runtime/test verification. **Status:** FOUR-PROFILE PICKLE 12/12 PASS; STRICT MO AUDIO GATE FAIL, UI / 1.7 OPEN.
 
-2026-10-14 author decision: Since no public/private play or old saves exist, pre-publication Core/Grains scenario save-migration support is unnecessary. Grains no longer supplies the three starting Defs or `LegacyStartingScenarios/`; Scenarios exclusively owns `AMJC_NewVillage`, `AMJC_PlayerVillage`, `AMJC_Villager` and conditional start supplies. The old provider-guard staging and synthetic old-save migrations were removed from Scenarios; current authoritative test procedure is `Docs/RuntimeTesting.md`.
+The author retired unpublished Core/Grains old-save provider migration. Scenarios exclusively owns `AMJC_NewVillage`, `AMJC_PlayerVillage`, `AMJC_Villager`; Grains has zero legacy scenario loader/Defs. Scenarios source [#12 / 7668d61](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios/commit/7668d61aa111c3668077014727e032d35a5efc2e) removed MO wholesale start-part replacement in favour of item-specific and order-independent MO/Grains patches. Older [native run 38534168906](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38534168906) had grains-mo 1/3, now resolved.
 
-2026-10-14 actual native Linux 1.6 evidence: [Project Actions #38525733684](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38525733684) three-profile loaded-def ownership 3/3, ERROR 0; [#38526753894](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38526753894) Scenarios and Scenarios＋Grains actual colony starts, 6/6, ERROR 0. Pinned Grains 9e1898de and Scenarios bf931a6e. Formal assertions and limits recorded in `Docs/RuntimeTesting.md`.
+Actual isolated Linux 1.6 [Project native #38542690689](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38542690689), pinned Scenarios f7b2cfb5 / Grains 9e1898de, used real MO/VEF/SYR and original Scenarios tests. All four profiles 3/3 Pickle each (12/12 total), actual map starts and supply/starting research checks, exits0. Vanilla and Grains profiles native ERROR0 and full PASS. MO and Grains+MO each had 2 known FMOD audio Unity ERRORs: strict overall FAIL. Full source, expected behaviour and untested scope: `Docs/RuntimeTesting.md`. Real chooser list-data [#38532021950](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38532021950) three profiles PASS, rendered menu screenshot/click untested.
 
-Remaining: actual native new starts with MO and Grains＋MO, rendered scenario menu and click/screenshot, 1.7, long play. These PASS results are not publication or untested-profile evidence.
+Remaining: identify/resolve source of inherited MO/VEF/SYR FMOD ERROR; do not suppress or reclassify. 1.7, player UI, long gameplay and Steam publication remain OPEN. The separate Project FMOD workstream owns sound diagnosis and shares its status through Project main Coordination; user is not a message relay.
 
 ### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
 
