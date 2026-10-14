@@ -11,20 +11,25 @@ $RepositoryRoot=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 $target=Join-Path $ModsRoot 'AncientMedievalJapanScenarios.E2ETarget'
 $test=Join-Path $ModsRoot 'AncientMedievalJapanScenarios.E2E'
 $grainTarget=Join-Path $ModsRoot 'AncientMedievalJapanScenarios.GrainsTarget'
-# Fail before replacing generated targets if the optional source is old or missing.
+# Grains must be fully separated; reject stale providers before changing test targets.
 if ($spec.UseGrains) {
- if (-not $GrainsRepositoryRoot) { throw 'GrainsRepositoryRoot is required for the Grains profiles.' }
+ if (-not $GrainsRepositoryRoot) { throw 'GrainsRepositoryRoot is required for Grains profiles.' }
  $GrainsRepositoryRoot=(Resolve-Path -LiteralPath $GrainsRepositoryRoot).Path
  [xml]$grainLoader=Get-Content -LiteralPath (Join-Path $GrainsRepositoryRoot 'loadFolders.xml') -Raw -Encoding UTF8
- $guards=@($grainLoader.SelectNodes('/loadFolders/v1.6/li[@IfModNotActive="sucro.ancientmedievaljapan.scenarios"]'))
- if ($guards.Count -ne 2 -or [string]$guards[0].InnerText -ne 'LegacyStartingScenarios' -or [string]$guards[1].InnerText -ne 'LegacyStartingScenarios/Compatibility/MedievalOverhaul' -or $guards[1].GetAttribute('IfModActive') -ne 'DankPyon.Medieval.Overhaul') { throw 'Grains must have both guarded LegacyStartingScenarios roots and the MO-positive guard.' }
+ $entries=@($grainLoader.SelectNodes('/loadFolders/v1.6/li'))
+ if ($entries.Count -ne 3 -or @($entries | Where-Object { $_.InnerText -like '*LegacyStartingScenarios*' }).Count -ne 0) {
+  throw 'Grains must have exactly Base/MO/non-MO load roots and no legacy starting scenario.'
+ }
+ if (Test-Path -LiteralPath (Join-Path $GrainsRepositoryRoot 'LegacyStartingScenarios')) {
+  throw 'LegacyStartingScenarios must not be present in the source Grains tree.'
+ }
 }
 foreach ($path in @($target,$test,$grainTarget)) {
  if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Recurse -Force }
 }
 function Stage-Runtime([string]$Source,[string]$Destination,[string]$Id,[string[]]$After) {
  New-Item -ItemType Directory -Force -Path (Join-Path $Destination 'About') | Out-Null
- foreach ($folder in @('Defs','Patches','Textures','Languages','Compatibility','BaseWithoutMO','LegacyStartingScenarios','Assemblies','1.6')) {
+ foreach ($folder in @('Defs','Patches','Textures','Languages','Compatibility','BaseWithoutMO','Assemblies','1.6')) {
   $from=Join-Path $Source $folder
   if (Test-Path -LiteralPath $from) { Copy-Item -LiteralPath $from -Destination $Destination -Recurse }
  }
@@ -41,7 +46,6 @@ function Stage-Runtime([string]$Source,[string]$Destination,[string]$Id,[string[
 }
 if ($spec.UseGrains) {
  Stage-Runtime $GrainsRepositoryRoot $grainTarget 'sucro.ancientmedievaljapan.core.scenariose2etarget' @('dankpyon.medieval.overhaul')
- foreach ($guard in $guards) { $guard.SetAttribute('IfModNotActive','sucro.ancientmedievaljapan.scenarios.e2etarget') }
  $grainLoader.Save((Join-Path $grainTarget 'loadFolders.xml'))
 }
 Stage-Runtime $RepositoryRoot $target 'sucro.ancientmedievaljapan.scenarios.e2etarget' @('dankpyon.medieval.overhaul','sucro.ancientmedievaljapan.core.scenariose2etarget')
