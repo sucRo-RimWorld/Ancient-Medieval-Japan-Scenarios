@@ -38,8 +38,23 @@ def project(mo,grains,loader=None):
     assert pawn.findtext('defaultFactionDef')=='AMJC_PlayerVillage'
     stocks=scenario.findall('scenario/parts/li[@Class="ScenPart_StartingThing_Defined"]')
     items={n.findtext('thingDef'):int(n.findtext('count')) for n in stocks};assert len(items)==len(stocks)
-    if grains:assert items.get('AMJC_Millet')==200 and items.get('AMJC_RawMillet')==100 and 'RawRice' not in items
-    else:assert items.get('RawRice')==300 and not any(x.startswith('AMJC_') for x in items)
+    expected={'Pemmican':1080,'RawRice':300,'MedicineHerbal':20,
+              'WoodLog':400,'Steel':30,'Cloth':80,'Silver':150,'Bow_Short':2,
+              'MeleeWeapon_Knife':2,'MeleeWeapon_Club':1}
+    if mo:
+        expected.pop('Pemmican');expected['DankPyon_MealRations']=60
+        expected['WoodLog']=200;expected['DankPyon_RawWood']=200
+        expected.pop('Steel');expected['DankPyon_IronIngot']=30
+    if grains:
+        expected.pop('RawRice')
+        expected.update({'AMJC_Millet':200,'AMJC_RawMillet':100})
+    assert items==expected, 'Full four-profile starting supply inventory differs'
+    stuff={n.findtext('thingDef'):n.findtext('stuff') for n in stocks}
+    assert stuff['MeleeWeapon_Knife']==('DankPyon_IronIngot' if mo else 'Steel')
+    assert stuff['MeleeWeapon_Club']=='WoodLog'
+    assert {x.findtext('project') for x in scenario.findall('scenario/parts/li[@Class="ScenPart_StartingResearch"]')} == (
+        {'DankPyon_Lumber','DankPyon_RusticFurniture','DankPyon_BasicCooking'} if mo else set())
+    assert sum(x.get('Class')=='ScenPart_StartingResearch' for x in scenario.findall('scenario/parts/li')) == (3 if mo else 0)
     assert bool(scenario.findall('scenario/parts/li[@Class="ScenPart_StartingResearch"]'))==mo
     assert ('DankPyon_Peasant' in [n.text for n in pawn.findall('apparelTags/li')])==mo
     if not mo:assert all(not (n.text or '').strip().startswith('DankPyon_') for n in doc.iter())
@@ -53,9 +68,16 @@ class Contracts(unittest.TestCase):
     def test_guard_loss_is_rejected(self):
         loader=ET.parse(ROOT/'loadFolders.xml').getroot();loader.findall('v1.6/li')[2].attrib.clear()
         with self.assertRaises(AssertionError):project(False,False,loader)
-    def test_patch_order_is_required(self):
-        loader=ET.parse(ROOT/'loadFolders.xml').getroot();v=loader.find('v1.6');a,b=list(v)[1:];v.remove(a);v.remove(b);v.extend([b,a])
-        with self.assertRaises(AssertionError):project(True,True,loader)
+    def test_mo_and_grains_patches_are_order_independent(self):
+        original=project(True,True)
+        loader=ET.parse(ROOT/'loadFolders.xml').getroot()
+        v=loader.find('v1.6');a,b=list(v)[1:];v.remove(a);v.remove(b);v.extend([b,a])
+        reversed_order=project(True,True,loader)
+        self.assertEqual(ET.tostring(original),ET.tostring(reversed_order))
+    def test_whole_scenario_replacement_is_forbidden(self):
+        patch=ET.parse(ROOT/'Compatibility/MedievalOverhaul/Patches/StartingScenarios.xml').getroot()
+        self.assertFalse(any(op.findtext('xpath')==
+            '/Defs/ScenarioDef[defName="AMJC_NewVillage"]/scenario/parts' for op in patch))
     def test_metadata_and_localization(self):
         about=ET.parse(ROOT/'About/About.xml').getroot()
         self.assertEqual(about.findtext('packageId'),'sucro.ancientmedievaljapan.scenarios')
