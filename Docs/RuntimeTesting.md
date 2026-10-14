@@ -75,3 +75,31 @@ Project の独立Linuxランナー（ライセンス済み RimWorld 1.6.4871 rev
 **選択候補の確認：** [Actions #38532021950](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38532021950) は `ScenarioLister.ScenariosInCategory(ScenarioCategory.FromDef)` 上で、Grains単体0件、Scenariosのみ・Grains＋ScenariosでNew Village各1件を確認。3/3 PASS、全構成ERROR 0。これはリストデータの検証であり、画面の描画やクリック成功は未証明。
 
 **残る未検証：** MO環境のFMOD音声エラーが0になること、RimWorld 1.7、画面スクリーンショット・クリック操作、長期プレイ、Workshop実反映。上記のPickle 12/12と全構成の公開可能判定を混同しない。
+
+
+### Linux 1.6 — verified converted-audio functional matrix (separate from release acceptance)
+
+[Project native run #38566680624](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38566680624)
+executed the **original** three Pickle loaded-provider/village-definition/
+native-start scenarios per profile with Scenarios source
+`f7b2cfb56a408416c6aae43c4bfc8d6f373be7f0` and Grains
+`9e1898de7104cd951349c6fc0da8ce870626721c`. The isolated licensed
+Linux 1.6 game copied legitimate VEF/SYR/MO providers and converted only
+the exact known incompatible SYR Honk and MO FlaskBreak MP3 files to
+44.1kHz stereo 16-bit PCM WAV inside the disposable copy.
+
+| Profile | Owner scenarios | Game exit | Native Unity ERROR |
+|---|---:|---:|---:|
+| Vanilla | 3/3 | 0 | 0 |
+| Grains | 3/3 | 0 | 0 |
+| MO | 3/3 | 0 | 0 |
+| Grains + MO | 3/3 | 0 | 0 |
+
+**12/12 PASS** for the existing source-owned fresh-start functionality
+under converted-audio media. The project test report explicitly labels
+`original_mp3_strict_acceptance=NOT_PASSED_BY_THIS_LANE`.
+Original unchanged SYR/MO audio still produces two FMOD errors in
+the original-media control and fails that strict distribution gate.
+No original provider, scenario Def, player config, source artwork or
+sound distribution was modified. This evidence does not cover actual
+audio audition, chooser UI clicks/pixels, 1.7, saves or long play.
