@@ -69,5 +69,7 @@ Project の独立Linuxランナー（ライセンス済み RimWorld 1.6.4871 rev
 
 - [所有境界 Actions #38525733684](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38525733684)：Grains単体（3開始Defなし）、Scenarios単体（3開始Def各1件）、Grains＋Scenarios（各1件）の**3構成×1シナリオ＝3/3 PASS**。全プロファイル正常終了、ERROR 0。ロード済みのDef・partsの存在確認であり、当時の検証は選択画面リストを直接検査していない。
 - [開始 E2E Actions #38526753894](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38526753894)：Scenarios単体およびScenarios＋Grains、各3件（要求プロバイダ、5人/派閥/研究/物資の定義、Quickstartからの実コロニー開始）＝**6/6 PASS**。両構成ともゲーム終了コード0、ERROR 0、Pickle `exitReason=passed`。検証結果とnative UnityログはActions artifactに保存。
+- [選択候補リスト Actions #38532021950](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38532021950)：本物の RimWorld 1.6 が用いる `ScenarioLister.ScenariosInCategory(ScenarioCategory.FromDef)` で候補の存在を検証。Grains単体は開始Defなし。Scenarios単体／Grains＋Scenariosは `AMJC_NewVillage` のScenario参照が候補に**正確に1件**、`ScenarioIsListedAnywhere` も真。**3/3 PASS、全構成exit0、ERROR0**。画面の画像を撮って確かめたものではない。
+
 
 **未検証：** Scenarios＋MO、Scenarios＋Grains＋MOの本番新規開始、1.7、シナリオ選択画面を実際に描画したスクリーンショット・クリック操作、長期プレイ、Workshop反映。ここに挙げた実機6件を、未実施構成やUIピクセルに拡大解釈しない。
