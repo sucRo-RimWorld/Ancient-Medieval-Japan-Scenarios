@@ -1,7 +1,7 @@
 # Scenarios実行時テストの所有と手順
 
 Scenariosが開始用Scenario/Faction/PawnKind・物資・研究・服装と実際の開始を検証する。
-Grainsは穀物・一次加工・製粉・食事・環境・通常Billを検証し、旧シナリオ互換用コピーの回帰だけを残す。
+Grainsは穀物・一次加工・製粉・食事・環境・通常Billを検証し、開始Defを提供しない。
 ScenariosのNewVillageSteps、RuntimeThread、Quickstartおよび汎用ランナー部は、
 Grains `faa2cedaa145811e9bb23598b5f11d78bb090984` のMITソースを基に移管・適応した。
 汎用スクリプトはその初期の動作を維持しつつ、このリポジトリが独立して管理する。
@@ -33,10 +33,8 @@ Grains通常テストのE2ETargetを消したり書き換えたりしない。
 | コピー | 別名対応 |
 |---|---|
 | Scenarios | 任意Grains条件→`sucro.ancientmedievaljapan.core.scenariose2etarget` |
-| Grains | Legacy領域の2つのScenarios不在条件→`sucro.ancientmedievaljapan.scenarios.e2etarget` |
 
-コピーのAbout名・packageId・依存／loadAfterもテスト用に変更する。GrainsのMO依存を外すのはコピーだけ。
-MOの存在条件とLegacy MOのAND条件は維持する。旧Grainsにガードがなければ配置前に失敗させる。
+コピーのAbout名・packageId・依存／loadAfterはテスト用に変更する。Grainsには旧シナリオのDefも互換領域も存在しないことを配置前に検証する。GrainsのMO条件は変更しない。
 
 ## Windows実行
 
@@ -61,8 +59,6 @@ Linux対応はまだ実装していない。Xvfb等の隔離と同じゲート�
 表示された3/3はゲームの実行結果ではない。C#ソースのコンパイル・ゲーム実行・private desktop上の描画は別ゲート。
 クラウド作業環境にはゲームManaged assembliesがないため、これらは未実施。
 
-ゲーム実行ハーネスは新規開始専用。旧セーブの入力コピー／再保存XML比較ゲートは[SaveMigrationTesting.md](SaveMigrationTesting.md)に記録する。
-旧セーブ読込／再保存／Scenarios追加・削除・提供元切替をゲーム内で実行する自動テストは未実装。
-次は実ゲーム環境で4構成をコンパイル・起動し、旧Grainsで生成した保存済みFaction・PawnKind・Scenario partsを含む
-セーブを固定fixtureとして作成する。追加・切替・再保存・削除をそれぞれ隔離して検証し、
-初期物資／研究が既存セーブに再配布されないことも確認する。GrainsやMOの安全な削除をこのテストで保証しない。
+ゲーム実行ハーネスは新規開始専用。旧 Core / Grains シナリオセーブは公開・実プレイ前で存在しないため、旧セーブ移行ゲートと合成XML移行テストは廃止済み。
+
+残作業：実ゲーム環境で Vanilla / Grains / MO / Grains＋MO の4構成をコンパイルして新規開始し、シナリオ定義の一意性、5人の生成、物資・初期研究、派閥参照、全ログ ERROR 0、表示を検証する。
