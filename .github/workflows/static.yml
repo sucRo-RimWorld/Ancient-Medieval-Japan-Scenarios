@@ -11,8 +11,6 @@ jobs:
       - run: python Tests/Production/test_scenarios.py
       - run: python Tests/Release/test_scenario_package.py
       - run: python Tests/Release/validate_add_changenote.py
-      - name: Save input and conservation gate tooling (synthetic XML only)
-        run: python Tests/Production/test_scenario_save_contract.py
   windows-tooling:
     runs-on: windows-latest
     steps:
@@ -20,7 +18,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: sucRo-RimWorld/Ancient-Medieval-Japan-Grains
-          ref: faa2cedaa145811e9bb23598b5f11d78bb090984
+          ref: 9e1898de7104cd951349c6fc0da8ce870626721c
           path: Tests/Fixtures/GrainsOwner
       - name: Parse scripts with Framework-era Windows PowerShell
         shell: powershell

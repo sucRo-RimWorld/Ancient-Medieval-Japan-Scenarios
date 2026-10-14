@@ -2,21 +2,20 @@
 
 This file is the live status/handoff surface for AMJ - Scenarios. Confirmed behavior and test procedures belong in the formal owner sources; completed chronology remains recoverable from Git history.
 
-### SCN-CURRENT-20261009 — paused engine/save verification handoff
+### SCN-CURRENT-20261014 — Scenarios sole owner and runtime gate
 
-**Owner:** Scenarios runtime/save verification  
-**Status:** OPEN — paused while higher-priority Grains work proceeds; engine/runtime/save release gates remain unresolved
+**Owner:** Scenarios runtime/test verification. **Status:** SOURCE RECONCILIATION IN PROGRESS — four-profile native game evidence remains OPEN.
 
-Repository extraction, guarded Grains coexistence, runtime-test ownership transfer, static/CI tooling and read-only save-contract tooling are complete. Current source baseline is the post-PR #2 save-contract implementation line; formal procedures are `Docs/RuntimeTesting.md` and `Docs/SaveMigrationTesting.md`.
+2026-10-14 author decision: Since no public/private play or old saves exist, pre-publication Core/Grains scenario save-migration support is unnecessary. Grains no longer supplies the three starting Defs or `LegacyStartingScenarios/`; Scenarios exclusively owns `AMJC_NewVillage`, `AMJC_PlayerVillage`, `AMJC_Villager` and conditional start supplies. The old provider-guard staging and synthetic old-save migrations were removed from Scenarios; current authoritative test procedure is `Docs/RuntimeTesting.md`.
 
-Still required when this workstream resumes: installed-game C# compilation and four-profile starts, isolated production-ID legacy save load/re-save, provider add/remove coverage, rendering, exact fresh evidence and every-ERROR = 0. No safe Grains/MO removal or release-readiness claim follows from the completed static tooling.
+Remaining: actual RimWorld native four-profile new starts, rendering/UI, isolated complete logs and every-ERROR = 0. Neither static CI nor removal of unneeded legacy gates establishes a successful game launch or a release.
 
 ### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
 
 **Owner:** Scenarios packaging/release
-**Status:** SOURCE IMPLEMENTED; runtime/old-save publication blockers remain, no Steam upload
+**Status:** SOURCE IMPLEMENTED; runtime publication blockers remain, no Steam upload
 
-Add Changenote support follows Project `Docs/WorkshopChangenotes.md`: source version `0.1.0-dev` agrees across `About/About.xml`, `About/Manifest.xml` and `About/Changelog.txt`. A new fast metadata validator runs in existing static CI. `.rimignore` keeps both About metadata files in YADA-delivered payload. This does not promote the unverified Scenarios gameplay/old-save gates to PASS or create a subscriber dependency.
+Add Changenote support follows Project `Docs/WorkshopChangenotes.md`: source version `0.1.0-dev` agrees across `About/About.xml`, `About/Manifest.xml` and `About/Changelog.txt`. A new fast metadata validator runs in existing static CI. `.rimignore` keeps both About metadata files in YADA-delivered payload. This does not promote the unverified Scenarios gameplay gates to PASS or create a subscriber dependency.
 
 ### RULE-AUDIT-20261008 — operating-rule consolidation
 

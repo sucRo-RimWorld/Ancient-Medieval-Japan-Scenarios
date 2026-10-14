@@ -36,9 +36,10 @@ try {
   $grainTarget=Join-Path $mods 'AncientMedievalJapanScenarios.GrainsTarget'
   Assert ((Test-Path $grainTarget) -eq $spec.UseGrains) 'Unrequested Grains target present.'
   if ($spec.UseGrains) {
-   [xml]$guards=Get-Content (Join-Path $grainTarget 'loadFolders.xml') -Raw
-   Assert (@($guards.SelectNodes('/loadFolders/v1.6/li[@IfModNotActive="sucro.ancientmedievaljapan.scenarios.e2etarget"]')).Count -eq 2) 'Legacy exclusion aliases lost.'
-   foreach ($folder in @('Defs','Languages','Compatibility','BaseWithoutMO','LegacyStartingScenarios','Textures')) {
+   [xml]$grainLoader=Get-Content (Join-Path $grainTarget 'loadFolders.xml') -Raw
+   Assert (@($grainLoader.SelectNodes('/loadFolders/v1.6/li')).Count -eq 3) 'Grains staging added obsolete scenario folders.'
+   Assert (-not (Test-Path (Join-Path $grainTarget 'LegacyStartingScenarios'))) 'Legacy provider leaked into Grains target.'
+   foreach ($folder in @('Defs','Languages','Compatibility','BaseWithoutMO','Textures')) {
     foreach ($file in Get-ChildItem -LiteralPath (Join-Path $GrainsRepositoryRoot $folder) -Recurse -File) {
      $relative=$file.FullName.Substring((Resolve-Path $GrainsRepositoryRoot).Path.Length+1)
      Assert ((Get-FileHash $file.FullName).Hash -eq (Get-FileHash (Join-Path $grainTarget $relative)).Hash) "Grains runtime bytes changed: $relative"
