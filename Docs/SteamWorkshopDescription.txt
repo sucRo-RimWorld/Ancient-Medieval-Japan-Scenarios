@@ -12,13 +12,13 @@
 New Village focuses on starting a modest community with limited supplies, rather than on a ready-made advanced settlement. Exact starting-stock balance, including a proposed rice amount, is not yet final.
 
 [h2]Compatibility and installation[/h2]
-RimWorld 1.6. AMJ Grains and Medieval Overhaul are optional. When used with Grains, use the post-migration version including [url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains/commit/3b92e3816d78f8ee9596c87a76e937f276d3344c]the duplicate-Def prevention change[/url]; older Core/Grains releases can define the same scenario objects twice.
+RimWorld 1.6. AMJ Grains and Medieval Overhaul are optional. Use [url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains/commit/9e1898de7104cd951349c6fc0da8ce870626721c]fully separated Grains[/url] or later; old development snapshots may still define New Village and cause duplicate start definitions.
 
 [h2]Save compatibility[/h2]
 Adding, removing or switching scenario-content providers in an existing save is [b]not verified[/b]. Existing saves will not receive a new scenario's starting supplies or research. Removing scenario-related faction or pawn definitions may affect saves using them.
 
 [h2]Development status[/h2]
-[b]Development candidate — not release-ready; do not install as a published gameplay Mod yet.[/b] XML/provider checks have been prepared, but real-game starts and existing-save migration still need validation.
+[b]Development version — not release-ready.[/b] Real RimWorld 1.6 starts are verified with Scenarios alone and with Grains. Medieval Overhaul combined starts still require correction or further runtime verification; rendered menu interaction and long play are not verified.
 
 Details: [url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios]GitHub README[/url]
 
@@ -38,12 +38,12 @@ Details: [url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios
 「新しい村」は、限られた物資で小規模な共同体を築く開始を目的とします。米などの初期物資の数量には、まだ確定していない案があります。
 
 [h2]互換性・導入条件[/h2]
-RimWorld 1.6向け。AMJ GrainsとMedieval Overhaulは任意です。Grainsと併用する場合は、[url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains/commit/3b92e3816d78f8ee9596c87a76e937f276d3344c]重複Def防止に対応した版[/url]以降を使用してください。旧Core／Grainsでは同じシナリオ要素が二重定義されるおそれがあります。
+RimWorld 1.6向け。AMJ GrainsとMedieval Overhaulは任意です。Grainsは[url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Grains/commit/9e1898de7104cd951349c6fc0da8ce870626721c]開始シナリオの完全分離版[/url]以降を使用してください。旧開発版では「新しい村」の定義が重複する可能性があります。
 
 [h2]セーブ互換性[/h2]
 既存セーブへの追加・削除・提供Modの切り替えは[b]未検証[/b]です。開始シナリオの初期物資や研究は、既存セーブに後から付与されません。専用勢力・村人を利用するセーブからの削除には注意が必要です。
 
 [h2]開発状況[/h2]
-[b]開発候補であり、公開可能な段階ではありません。実プレイ用にはまだ導入しないでください。[/b] XML・提供元の検証は進んでいますが、実ゲームでの開始や既存セーブ移行は未検証です。
+[b]開発中のため、公開準備は完了していません。[/b] RimWorld 1.6でScenarios単体とGrains併用の新規開始を検証済みです。Medieval Overhaul併用時の実行時検証・修正、および選択画面の操作確認と長期プレイ検証は未完了です。
 
 詳細：[url=https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Scenarios]GitHub README[/url]
