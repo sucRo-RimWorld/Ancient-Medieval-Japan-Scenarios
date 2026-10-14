@@ -10,6 +10,8 @@ This file is the live status/handoff surface for AMJ - Scenarios. Confirmed beha
 
 2026-10-14 actual native Linux 1.6 evidence: [Project Actions #38525733684](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38525733684) three-profile loaded-def ownership 3/3, ERROR 0; [#38526753894](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38526753894) Scenarios and Scenarios＋Grains actual colony starts, 6/6, ERROR 0. Pinned Grains 9e1898de and Scenarios bf931a6e. Formal assertions and limits recorded in `Docs/RuntimeTesting.md`.
 
+Additional [native chooser list #38532021950](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/38532021950) verifies Grains-only absent, Scenarios-only exactly one, Grains＋Scenarios exactly one in RimWorld's actual ScenarioLister.FromDef category (3/3; every native exit 0, ERROR 0). This is **menu list-data evidence**, not rendered screenshot/selection-click evidence.
+
 Remaining: actual native new starts with MO and Grains＋MO, rendered scenario menu and click/screenshot, 1.7, long play. These PASS results are not publication or untested-profile evidence.
 
 ### SCN-ADD-CHANGENOTE-20261008 — Steam changenote author metadata
