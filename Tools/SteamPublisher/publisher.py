@@ -26,7 +26,7 @@ ALLOWED_DIRS = frozenset({
     "Compatibility", "Sounds", "Resources", "LoadFolders", "BaseWithoutMO",
     "1.6", "1.7", "Royalty", "Ideology", "Biotech", "Anomaly", "Odyssey",
 })
-ALLOWED_FILES = frozenset({"loadFolders.xml"})
+ALLOWED_FILES = frozenset({"loadFolders.xml", "LoadFolders.xml"})
 NAME_PATTERN = re.compile(r"^sucRo-RimWorld/[A-Za-z0-9._-]+$")
 VERSION_PATTERN = re.compile(r"^\d+(?:\.\d+){1,3}(?:-[A-Za-z0-9.-]+)?$")
 CHANGE_PATTERN = re.compile(r"^(\d+(?:\.\d+){1,3}(?:-[A-Za-z0-9.-]+)?)\s+-\s+\S")
@@ -165,14 +165,18 @@ def quote(value: str) -> str:
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"').replace("\r\n", "\n").replace("\r", "\n").replace("\t", "\\t") + '"'
 
 
-def state_file() -> Path:
-    raw = os.environ.get("AMJ_STEAM_STATE", "")
-    require(bool(raw), "Isolated per-Mod AMJ_STEAM_STATE host variable is missing")
-    path = Path(raw).expanduser()
-    require(path.is_absolute() and not path.is_symlink(), "Unsafe host state path")
-    require(path.parent.is_dir() and not path.parent.is_symlink()
-            and not (stat.S_IMODE(path.parent.stat().st_mode) & 0o077),
-            "Host state parent must already be a private 0700 directory")
+def state_file(cfg: dict) -> Path:
+    """Use a different private host state for every approved repository."""
+    raw = os.environ.get("AMJ_STEAM_STATE_DIR", "")
+    require(bool(raw), "Shared publisher AMJ_STEAM_STATE_DIR is missing")
+    directory = Path(raw).expanduser()
+    require(directory.is_absolute() and directory.is_dir() and not directory.is_symlink()
+            and not (stat.S_IMODE(directory.stat().st_mode) & 0o077),
+            "Publisher state directory must be a real private 0700 directory")
+    # Config repository identity was pinned and validated by config_from().
+    filename = cfg["repository"].split("/", 1)[1] + ".json"
+    path = directory / filename
+    require(not path.is_symlink(), "Publisher state may not be a symlink")
     if path.exists():
         require(path.is_file() and not (stat.S_IMODE(path.stat().st_mode) & 0o077),
                 "Host state must be a private 0600 file")
@@ -222,7 +226,7 @@ def upload(checkout: Path, candidate: Path, cfg: dict, operation: str) -> None:
     require(hashlib.sha256(candidate.read_bytes()).hexdigest()
             == candidate.with_suffix(".sha256").read_text(encoding="ascii").strip(),
             "Candidate ZIP checksum mismatch")
-    state = state_file()
+    state = state_file(cfg)
     require(checkout.resolve() not in state.resolve().parents, "State must be outside checkout")
     state_load(state, cfg, operation)
     executable = Path(os.environ.get("AMJ_STEAMCMD_BIN", ""))
