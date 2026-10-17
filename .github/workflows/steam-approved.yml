@@ -4,6 +4,7 @@ on:
     types: [opened]
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: amj-steam-release
   cancel-in-progress: false
@@ -74,8 +75,35 @@ jobs:
     environment: steam-workshop-private
     timeout-minutes: 10
     steps:
-      - name: Record explicit GitHub reviewer gate completion
-        run: echo "Author-controlled Environment gate released this source-pinned workflow."
+      - name: Verify actual author approval recorded by GitHub for this workflow run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from urllib.request import Request, urlopen
+          endpoint = ("https://api.github.com/repos/" + os.environ["GITHUB_REPOSITORY"] +
+                      "/actions/runs/" + os.environ["GITHUB_RUN_ID"] + "/approvals")
+          request = Request(endpoint, headers={
+              "Authorization": "Bearer " + os.environ["GH_TOKEN"],
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          })
+          with urlopen(request, timeout=20) as response:
+              records = json.load(response)
+          approved = any(
+              item.get("state", "").lower() == "approved" and
+              item.get("user", {}).get("login") == "sucRo0629" and
+              any(env.get("name") == "steam-workshop-private"
+                  for env in item.get("environments", []))
+              for item in records
+          )
+          if not approved:
+              raise SystemExit("BLOCKED: No GitHub-recorded author Approve button for this run/environment")
+          print("GITHUB_AUTHOR_BUTTON_APPROVAL_VERIFIED")
+          PY
 
   tag_readiness:
     needs: [preflight, author_approval]
