@@ -1,5 +1,6 @@
 name: Scenario static contracts
-on: [push, pull_request]
+on:
+  workflow_dispatch:
 jobs:
   static:
     runs-on: ubuntu-latest
