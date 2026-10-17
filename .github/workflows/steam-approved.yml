@@ -1,0 +1,137 @@
+name: AMJ Workshop publication — author approval required
+on:
+  issues:
+    types: [opened]
+permissions:
+  contents: read
+concurrency:
+  group: amj-steam-release
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event.issue.user.login == 'sucRo0629' &&
+      (github.event.issue.title == '[publish:amj-create-private]' ||
+       github.event.issue.title == '[publish:amj-update]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      operation: ${{ steps.guard.outputs.operation }}
+      source_sha: ${{ steps.guard.outputs.source_sha }}
+    steps:
+      - name: Confirm the explicit author request and exact default-branch SHA
+        id: guard
+        shell: bash
+        env:
+          REQUEST_TITLE: ${{ github.event.issue.title }}
+          REQUEST_BODY: ${{ github.event.issue.body }}
+          REQUEST_AUTHOR: ${{ github.event.issue.user.login }}
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_AUTHOR" == "sucRo0629" ]] || exit 2
+          [[ "$GITHUB_EVENT_NAME" == "issues" && "$GITHUB_REF" == "refs/heads/main" ]] || exit 2
+          [[ "$REQUEST_BODY" =~ ^source_sha=([0-9a-f]{40})$ ]] || exit 2
+          [[ "$GITHUB_SHA" == "${BASH_REMATCH[1]}" ]] || exit 2
+          case "$REQUEST_TITLE" in
+            '[publish:amj-create-private]') mode=create_private ;;
+            '[publish:amj-update]') mode=update_existing ;;
+            *) exit 2 ;;
+          esac
+          echo "operation=$mode" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.guard.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assemble and verify subscriber-only package; do not start RimWorld
+        shell: bash
+        env:
+          MODE: ${{ steps.guard.outputs.operation }}
+        run: |
+          set -euo pipefail
+          python -m py_compile Tools/SteamPublisher/publisher.py Tools/SteamPublisher/tags.py
+          python Tools/SteamPublisher/publisher.py build --checkout . \
+            --output Dist/amj-workshop.zip --repo "$GITHUB_REPOSITORY" --operation "$MODE"
+          test "$(sha256sum Dist/amj-workshop.zip | cut -d' ' -f1)" = "$(cat Dist/amj-workshop.sha256)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amj-reviewed-workshop-source
+          path: |
+            Dist/amj-workshop.zip
+            Dist/amj-workshop.json
+            Dist/amj-workshop.sha256
+          if-no-files-found: error
+          retention-days: 5
+
+  author_approval:
+    needs: preflight
+    runs-on: ubuntu-latest
+    # Verify REQUIRED REVIEWERS are configured for this owner Environment before enabling.
+    environment: steam-workshop-private
+    timeout-minutes: 10
+    steps:
+      - name: Record explicit GitHub reviewer gate completion
+        run: echo "Author-controlled Environment gate released this source-pinned workflow."
+
+  tag_readiness:
+    needs: [preflight, author_approval]
+    runs-on: [self-hosted, windows, steamworks-tag-publisher]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.preflight.outputs.source_sha }}
+          persist-credentials: false
+      - name: Verify trusted Windows Steamworks session (no mutation)
+        shell: pwsh
+        run: |
+          python Tools/SteamPublisher/tags.py probe --checkout . --repo "$env:GITHUB_REPOSITORY"
+          if ($LASTEXITCODE -ne 0) { throw "Steamworks session prerequisite failed" }
+
+  steam_upload:
+    needs: [preflight, author_approval, tag_readiness]
+    runs-on: [self-hosted, linux, steamcmd-private-publisher]
+    timeout-minutes: 30
+    outputs:
+      published_id: ${{ steps.publish.outputs.published_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.preflight.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: amj-reviewed-workshop-source
+          path: Dist
+      - name: Upload exact candidate and version changenotes on isolated host
+        id: publish
+        shell: bash
+        env:
+          MODE: ${{ needs.preflight.outputs.operation }}
+        run: |
+          set -euo pipefail
+          python3 Tools/SteamPublisher/publisher.py upload --checkout . \
+            --output Dist/amj-workshop.zip --repo "$GITHUB_REPOSITORY" --operation "$MODE"
+
+  steam_tags:
+    needs: [preflight, steam_upload]
+    runs-on: [self-hosted, windows, steamworks-tag-publisher]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.preflight.outputs.source_sha }}
+          persist-credentials: false
+      - name: Apply exactly this Mod's reviewed tags to its uploaded item
+        shell: pwsh
+        env:
+          PUBLISHED_ITEM: ${{ needs.steam_upload.outputs.published_id }}
+        run: |
+          python Tools/SteamPublisher/tags.py sync --checkout . \
+            --repo "$env:GITHUB_REPOSITORY" --item-id "$env:PUBLISHED_ITEM" \
+            --after-upload-run-id "$env:GITHUB_RUN_ID"
+          if ($LASTEXITCODE -ne 0) { throw "Tag sync unresolved; do not repeat content upload" }
