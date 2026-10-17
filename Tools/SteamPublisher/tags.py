@@ -48,15 +48,19 @@ def agent_call(path: Path, arguments: list[str], timeout: int = 240) -> dict:
     return obj["data"]
 
 
-def private_receipt(checkout: Path) -> Path:
-    raw = os.environ.get("AMJ_STEAM_TAG_RECEIPT", "")
+def private_receipt(checkout: Path, cfg: dict) -> Path:
+    """Separate idempotency receipts for each publisher, under one private profile."""
+    raw = os.environ.get("AMJ_STEAM_TAG_RECEIPT_DIR", "")
     home = os.environ.get("LOCALAPPDATA", "")
-    require(bool(raw and home), "Per-Mod Windows receipt is not provisioned")
-    receipt = Path(raw).resolve()
-    require(receipt.is_relative_to(Path(home).resolve())
-            and not receipt.is_relative_to(checkout.resolve()), "Receipt outside trusted user profile")
-    require(not receipt.is_symlink(), "Receipt cannot be symlink")
-    require(receipt.parent.exists(), "Receipt directory must be provisioned")
+    require(bool(raw and home), "Private Windows tag receipt directory is not provisioned")
+    directory = Path(raw)
+    require(directory.is_absolute() and directory.is_dir() and not directory.is_symlink(),
+            "Invalid private Windows tag receipt directory")
+    require(directory.resolve().is_relative_to(Path(home).resolve())
+            and not directory.resolve().is_relative_to(checkout.resolve()),
+            "Receipt directory must be in the Windows publisher profile, outside checkout")
+    receipt = directory / (cfg["repository"].split("/", 1)[1] + ".json")
+    require(not receipt.is_symlink(), "Receipt may not be a symlink")
     return receipt
 
 
@@ -88,7 +92,7 @@ def main() -> None:
     agent = Path(raw_agent).resolve()
     require(agent.is_file() and os.access(agent, os.X_OK)
             and not agent.is_relative_to(a.checkout.resolve()), "Invalid host agent")
-    receipt = private_receipt(a.checkout)
+    receipt = private_receipt(a.checkout, cfg)
     probe = agent_call(agent, ["steam-session-probe"], timeout=90)
     require(probe.get("ready") is True and probe.get("steamUserLoggedOn") is True
             and probe.get("steamAppId") == APPID, "Steamworks session not authenticated for RimWorld")
